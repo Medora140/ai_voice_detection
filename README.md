@@ -1,3 +1,14 @@
+---
+title: Voiceprint AI Voice Detector
+emoji: 🎙️
+colorFrom: red
+colorTo: yellow
+sdk: gradio
+sdk_version: 4.44.0
+app_file: app.py
+pinned: false
+---
+
 # 🎙️ Cross-Lingual AI Voice Deepfake Detector
 
 An end-to-end audio anti-spoofing pipeline engineered to detect synthetic speech and zero-shot voice cloning attacks across multiple languages, including English, Hindi, Kannada, and Konkani.
@@ -97,7 +108,7 @@ Place reference .wav files into the samples/ directory so they appear as clickab
 Start the local server:
 
 Bash
-python app_ui.py
+python app.py
 Open your browser at http://127.0.0.1:7860 to access the drag-and-drop audio detector and microphone interface.
 
 2. **Run Automated Batch Benchmarks**
