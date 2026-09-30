@@ -1,0 +1,14 @@
+# Core PyTorch ML Framework
+torch
+torchaudio
+
+# Hugging Face (Pinned to the exact version used during your Colab training)
+transformers==4.37.2
+huggingface-hub
+
+# UI & Web Server
+gradio
+
+# Audio processing & array manipulation
+soundfile
+numpy
