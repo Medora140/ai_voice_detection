@@ -65,14 +65,15 @@ Clone the Repository:
 
 Download the codebase locally to your workspace:
 
-Bash
+```Bash
 git clone [https://github.com/](https://github.com/)<your-username>/ai-voice-detector-ui.git
-cd ai-voice-detector-ui
+cd ai-voice-detector-ui 
+```
 Create and Activate an Isolated Virtual Environment:
 
 Keeps project dependencies isolated from system Python:
 
-Bash
+```Bash
 python -m venv venv
 Activate the virtual environment based on your operating system:
 
@@ -84,12 +85,13 @@ Linux / macOS:
 
 Bash
 source venv/bin/activate
+```
 Install Required Dependencies:
 
 Installs PyTorch, Hugging Face Transformers, Gradio, and audio parsing tools:
-
-Bash
+```Bash
 pip install -r requirements.txt
+```
 Acquire Model Weights:
 
 Ensure the trained weights checkpoint (phase4_multicondition_mlp.pth) is placed inside the models/ directory:
