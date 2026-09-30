@@ -8,6 +8,8 @@ huggingface-hub
 
 # UI & Web Server
 gradio
+pydantic==2.10.6
+starlette<1.0.0
 
 # Audio processing & array manipulation
 soundfile
