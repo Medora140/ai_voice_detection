@@ -71,6 +71,16 @@ html, body, .gradio-container, .gradio-container main { background: var(--canvas
 
 examples = [[str(path)] for path in sorted(Path("samples").glob("*.wav"))]
 
+
+def reset_results(audio_file):
+    """Clear stale predictions and gate analysis until audio is available."""
+    if audio_file:
+        prompt = "Audio ready. Click **Analyze voice** to see the assessment for this recording."
+    else:
+        prompt = "Add a recording to see whether the voice sounds authentic or synthetic."
+    return None, prompt, gr.update(interactive=bool(audio_file))
+
+
 with gr.Blocks(title="Voiceprint — AI voice detector", css=CSS, theme=gr.themes.Base()) as demo:
     gr.HTML("""
       <header class="topbar">
@@ -90,7 +100,7 @@ with gr.Blocks(title="Voiceprint — AI voice detector", css=CSS, theme=gr.theme
                 type="filepath", label="Audio file", sources=["upload", "microphone"],
                 elem_classes="dropzone",
             )
-            analyze_btn = gr.Button("Analyze voice", variant="primary", elem_classes="primary-button")
+            analyze_btn = gr.Button("Analyze voice", variant="primary", elem_classes="primary-button", interactive=False)
             gr.HTML('<div class="privacy"><span>●</span><div>Your recording is used only to produce this result. For best results, use a clear clip up to 6 seconds.</div></div>')
             if examples:
                 gr.HTML('<div class="sample-heading">Or try a sample recording</div>')
@@ -99,6 +109,11 @@ with gr.Blocks(title="Voiceprint — AI voice detector", css=CSS, theme=gr.theme
             gr.HTML('<div class="panel-title">Detection result</div><p class="panel-note">Your assessment will appear here.</p>')
             label_output = gr.Label(num_top_classes=2, label="Voice classification")
             verdict_output = gr.Markdown("Add a recording to see whether the voice sounds authentic or synthetic.")
+    audio_input.change(
+        fn=reset_results,
+        inputs=audio_input,
+        outputs=[label_output, verdict_output, analyze_btn],
+    )
     analyze_btn.click(fn=analyze_voice, inputs=audio_input, outputs=[label_output, verdict_output])
     gr.HTML('<footer class="footer"><span>Voiceprint · AI voice analysis</span><span>Results are model estimates and may not be conclusive.</span></footer>')
 
