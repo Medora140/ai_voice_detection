@@ -97,7 +97,7 @@ Place reference .wav files into the samples/ directory so they appear as clickab
 Start the local server:
 
 Bash
-python app.py
+python app_ui.py
 Open your browser at http://127.0.0.1:7860 to access the drag-and-drop audio detector and microphone interface.
 
 2. **Run Automated Batch Benchmarks**

@@ -98,7 +98,7 @@ with gr.Blocks(title="Voiceprint — AI voice detector", css=CSS, theme=gr.theme
             gr.HTML('<div class="panel-title">Add an audio sample</div><p class="panel-note">Upload a file or record a few seconds of speech.</p>')
             audio_input = gr.Audio(
                 type="filepath", label="Audio file", sources=["upload", "microphone"],
-                elem_classes="dropzone",
+                format="wav", elem_classes="dropzone",
             )
             analyze_btn = gr.Button("Analyze voice", variant="primary", elem_classes="primary-button", interactive=False)
             gr.HTML('<div class="privacy"><span>●</span><div>Your recording is used only to produce this result. For best results, use a clear clip up to 6 seconds.</div></div>')
@@ -109,7 +109,17 @@ with gr.Blocks(title="Voiceprint — AI voice detector", css=CSS, theme=gr.theme
             gr.HTML('<div class="panel-title">Detection result</div><p class="panel-note">Your assessment will appear here.</p>')
             label_output = gr.Label(num_top_classes=2, label="Voice classification")
             verdict_output = gr.Markdown("Add a recording to see whether the voice sounds authentic or synthetic.")
-    audio_input.change(
+    audio_input.upload(
+        fn=reset_results,
+        inputs=audio_input,
+        outputs=[label_output, verdict_output, analyze_btn],
+    )
+    audio_input.stop_recording(
+        fn=reset_results,
+        inputs=audio_input,
+        outputs=[label_output, verdict_output, analyze_btn],
+    )
+    audio_input.clear(
         fn=reset_results,
         inputs=audio_input,
         outputs=[label_output, verdict_output, analyze_btn],
